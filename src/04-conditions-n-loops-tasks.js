@@ -27,8 +27,11 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+  if (num % 3 === 0) return 'Fizz';
+  if (num % 5 === 0) return 'Buzz';
+  return num;
 }
 
 
@@ -43,8 +46,15 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let num = n;
+  if (num === 0 || num === 1) return 1;
+  let res = n;
+  while (num > 1) {
+    num -= 1;
+    res *= num;
+  }
+  return res;
 }
 
 
@@ -60,8 +70,15 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  const start = n1;
+  const end = n2;
+  const len = end - start + 1;
+  let sum = 0;
+  for (let i = 0; i < len; i += 1) {
+    sum = sum + start + i;
+  }
+  return sum;
 }
 
 
@@ -80,8 +97,12 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) return false;
+  if (a + b > c && a + c > b && b + c > a) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -117,8 +138,17 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const R1 = rect1;
+  const R2 = rect2;
+  R1.right = R1.left + R1.width;
+  R1.bottom = R1.top + R1.height;
+  R2.right = R2.left + R2.width;
+  R2.bottom = R2.top + R2.height;
+  if (R1.left < R2.right && R1.right > R2.left && R1.top < R2.bottom && R1.bottom > R2.top) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -148,8 +178,10 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const d = (circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2;
+  if (d < circle.radius ** 2) { return true; }
+  return false;
 }
 
 
@@ -164,8 +196,19 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const repeatedChars = [];
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (!repeatedChars.includes(char)) {
+      if (!str.slice(i + 1).includes(char)) {
+        return char;
+      }
+      repeatedChars.push(char);
+    }
+  }
+
+  return null;
 }
 
 
@@ -208,8 +251,13 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  // return str.split('').reverse().join('');
+  let acc = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    acc += str[i];
+  }
+  return acc;
 }
 
 
@@ -225,8 +273,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return num.toString().split('').reverse().join('');
 }
 
 
@@ -268,8 +316,14 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let sum = num;
+  let arr = [];
+  while (sum > 9) {
+    arr = sum.toString().split('');
+    sum = arr.reduce((a, b) => parseInt(a, 10) + parseInt(b, 10));
+  }
+  return sum;
 }
 
 
